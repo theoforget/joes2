@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Joe's Part 2 </title>
+    <style>
+        @media screen and (max-width: 899px) {
+            body {
+                background-image: url('background2.jpg'); 
+                margin-left: auto;
+                margin-right: auto; 
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+            }
+        }
+        @media screen and (min-width: 900px) {
+            body {
+                background-image: url('background1.jpg');
+                margin-left: auto;
+                margin-right: auto;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+            }
+        }
+        .box {
+            background-color: white;
+            border: 15px solid black;
+            width: 30%;
+            min-width:300px;
+            align: justify;
+            font-family: Gill Sans, sans-serif;
+            font-size: 20px;
+            padding: 40px;
+            margin: 20px;
+            opacity:0.85;
+        }
+        .button {
+            background-color: black;
+            width: 30%;
+            min-width: 300px;
+            height: 50px;
+            font-family: Gill Sans, sans-serif;
+            font-size: 20px;
+            color: white;
+            border: 10px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        function orderCalc() {
+            var num_hotdog = document.forms[0].hotdogs.value;
+            var num_fries = document.forms[0].fries.value;
+            var num_sodas = document.forms[0].sodas.value;
+            var sum = 0;
+            if (num_hotdog == "empty" && num_fries == "empty" && num_sodas == "empty")
+                alert("No items have been ordered!");
+            if (num_hotdog != "empty")
+                sum += num_hotdog * 3.75; 
+            if (num_fries != "empty")
+                sum += num_fries * 2.00; 
+            if (num_sodas != "empty")
+                sum += num_sodas * 1.80; 
+            document.getElementById("orderSummary").innerHTML = "Order Summary<br><br>Subtotal: $" + sum + "<br>";
+            var discount = 0;
+            if (sum >= 20) {
+                discount = sum * 0.10;
+                sum -= discount;
+                document.getElementById("orderSummary").innerHTML += "Discount Applied! (-$" + discount.toFixed(2) + ")<br>";
+            }
+            var tax = (sum * 0.0625);
+            sum += tax;
+            document.getElementById("orderSummary").innerHTML += "Tax: $" + tax.toFixed(2) + "<br>";
+            document.getElementById("orderSummary").innerHTML += "Final Total: $" + sum.toFixed(2);
+        }
+    </script>
+</head>
+
+<body>
+    <center>
+    <div class="box">
+        Welcome to the new and improved <br> <img src="logo.png" width=100% height=100%> 
+        <br> Orders over $20 get a 10% discount! <br> Enter quantities below to place an order... <br>
+    </div>
+    <div class="box">
+    <form>
+        <label for="hotdogs">Hotdogs ($3.75)</label>
+            <select id="hotdogs" name="hotdogs">
+                <option value="empty" disabled selected></option>
+                <option value="1">1</option> <option value="2">2</option>
+                <option value="3">3</option> <option value="4">4</option>
+                <option value="5">5</option> <option value="10">10</option>
+                <option value="15">15</option> <option value="20">20</option>
+            </select> <br>
+        <label for="fries">Fries ($2.00)</label>
+            <select id="fries" name="fries">
+                <option value="empty" disabled selected></option>
+                <option value="1">1</option> <option value="2">2</option>
+                <option value="3">3</option> <option value="4">4</option>
+                <option value="5">5</option> <option value="10">10</option>
+                <option value="15">15</option> <option value="20">20</option>
+            </select> <br>
+        <label for="sodas">Sodas ($1.80)</label>
+            <select id="sodas" name="sodas">
+                <option value="empty" disabled selected></option>
+                <option value="1">1</option> <option value="2">2</option>
+                <option value="3">3</option> <option value="4">4</option>
+                <option value="5">5</option> <option value="10">10</option>
+                <option value="15">15</option> <option value="20">20</option>
+            </select> <br>
+    </form>
+    </div>
+    <button class="button" onclick="orderCalc()">
+        ORDER
+    </button> <br>
+    <div class="box" id="orderSummary">
+        Order Summary <br>
+    </div>
+    </center>
+</body>
+</html>
