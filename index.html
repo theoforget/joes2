@@ -4,22 +4,22 @@
     <meta charset="utf-8">
     <title> Joe's Part 2 </title>
     <style>
-        @media screen and (max-width: 640px) {
+        @media screen and (max-width: 800px) {
             body {
                 background-image: url('background2.jpg'); 
                 margin-left: auto;
                 margin-right: auto; 
                 background-repeat: no-repeat;
-                background-size: auto 100% ;
+                background-size: 100% auto;
             }
         }
-        @media screen and (min-width: 641px) {
+        @media screen and (min-width: 801px) {
             body {
                 background-image: url('background1.jpg');
                 margin-left: auto;
-                margin-right: auto;
+                margin-right: auto; 
                 background-repeat: no-repeat;
-                background-size: auto 100%;
+                background-size: 100% auto;
             }
         }
         .box {
@@ -62,17 +62,18 @@
                 sum += num_fries * 2.00; 
             if (num_sodas != "empty")
                 sum += num_sodas * 1.80; 
-            document.getElementById("orderSummary").innerHTML = "Order Summary<br><br>Subtotal: $" + sum + "<br>";
+            var message = "<div class='box'>Order Summary<br><br>Subtotal: $" + sum.toFixed(2) + "<br>";
             var discount = 0;
             if (sum >= 20) {
                 discount = sum * 0.10;
                 sum -= discount;
-                document.getElementById("orderSummary").innerHTML += "Discount Applied! (-$" + discount.toFixed(2) + ")<br>";
+                message += "Discount Applied! (-$" + discount.toFixed(2) + ")<br>";
             }
             var tax = (sum * 0.0625);
             sum += tax;
-            document.getElementById("orderSummary").innerHTML += "Tax: $" + tax.toFixed(2) + "<br>";
-            document.getElementById("orderSummary").innerHTML += "Final Total: $" + sum.toFixed(2);
+            message += "Tax: $" + tax.toFixed(2) + "<br>";
+            message += "Final Total: $" + sum.toFixed(2) + "</div>";
+            document.getElementById("orderSummary").innerHTML = message;
         }
     </script>
 </head>
@@ -114,9 +115,7 @@
     <button class="button" onclick="orderCalc()">
         ORDER
     </button> <br>
-    <div class="box" id="orderSummary">
-        Order Summary <br>
-    </div>
+    <div id="orderSummary"></div>
     </center>
 </body>
 </html>
